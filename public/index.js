@@ -21,6 +21,17 @@ document.addEventListener('turbolinks:load', function (e) {
   })
 })
 
+function timeTurbolinks () {
+  var tStart = new Date().getTime()
+  var end = () => {
+    console.log(`Turbolinks navigation took ${(new Date().getTime() - tStart)} ms`)
+    document.removeEventListener('turbolinks:load', end)
+  }
+  document.addEventListener('turbolinks:load', end)
+}
+
+document.addEventListener('turbolinks:click', timeTurbolinks)
+
 {
   let navBar = document.getElementById('navBar')
   window.DCRThings = {}
